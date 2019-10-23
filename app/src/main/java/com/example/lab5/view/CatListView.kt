@@ -6,6 +6,7 @@ import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
 import com.example.lab5.model.Cat
 import com.example.lab5.R
+import com.google.gson.Gson
 
 class CatListView(application: Application) : AndroidViewModel(application) {
 
@@ -16,6 +17,8 @@ class CatListView(application: Application) : AndroidViewModel(application) {
     var notCuteCount = MutableLiveData<Int>()
 
     /*TODO define var for imageUrl and name of type MutableLiveData */
+    var imageUrl = MutableLiveData<String>()
+    var name = MutableLiveData<String>()
 
 
     init {
@@ -28,6 +31,7 @@ class CatListView(application: Application) : AndroidViewModel(application) {
             .use { it.readText() }
 
         /*TODO Parse JSON data using Gson and add it to the "cats" list*/
+        cats = Gson().fromJson(text, Array<Cat>::class.java).toMutableList()
 
     }
 
@@ -35,6 +39,9 @@ class CatListView(application: Application) : AndroidViewModel(application) {
         if (cats.size > 0) {
             cats.removeAt(0).let { cat ->
                 /*TODO Set the value of imageUrl and name*/
+                imageUrl.value = cat.imageUrl
+                name.value = cat.name
+
             }
         } else {
             isListCompleted.value = true
@@ -56,4 +63,8 @@ class CatListView(application: Application) : AndroidViewModel(application) {
 
     /*TODO Implement a fun  notCuteClicked() this will be similar to cuteClicked() */
 
+    fun notCuteClicked() {
+        notCuteCount.value = (notCuteCount.value)?.plus(1)
+        advanceToNextSubject()
+    }
 }

@@ -7,6 +7,8 @@
     <data>
 
         <!--  TODO create a variable of type "CatListView"-->
+        <import type="com.example.lab5.view.CatListView"/>
+        <variable name="meow" type="CatListView" />
 
     </data>
 
@@ -40,6 +42,7 @@
             android:layout_marginEnd="100dp"
             android:layout_marginBottom="50dp"
             android:scaleType="centerCrop"
+            app:imageUrl="@{meow.imageUrl}"
             app:layout_constraintBottom_toTopOf="@+id/cat_name"
             app:layout_constraintDimensionRatio="1:1"
             app:layout_constraintEnd_toEndOf="parent"
@@ -67,6 +70,7 @@
             android:layout_marginTop="50dp"
             android:layout_marginEnd="36dp"
             android:backgroundTint="#86D548"
+            android:onClick="@{() -> meow.cuteClicked()}"
             android:text="@string/cute_button_label"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/not_cute_button"
@@ -80,6 +84,7 @@
             android:layout_marginStart="43dp"
             android:layout_marginTop="50dp"
             android:backgroundTint="#F8774B"
+            android:onClick="@{() -> meow.notCuteClicked()}"
             android:text="@string/not_cute_button_label"
             app:layout_constraintEnd_toStartOf="@+id/cute_button"
             app:layout_constraintStart_toStartOf="parent"
